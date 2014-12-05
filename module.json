@@ -1,0 +1,25 @@
+{
+  "name": "cmsis-core-stm32f4",
+  "version": "0.0.0",
+  "description": "CMSIS Core Implementation for stm32f4 MCUs",
+  "keywords": [
+    "cmsis"
+  ],
+  "author": "Bogdan Marinescu <bogdan.marinescu@arm.com>",
+  "repository": {
+    "url": "git@github.com:ARMmbed/cmsis-core-stm32f4.git",
+    "type": "git"
+  },
+  "homepage": "https://github.com/ARMmbed/cmsis-core-stm32f4",
+  "license": "Apache-2",
+  "extraIncludes": ["cmsis-core-stm32f4"],
+  "dependencies": {
+    "cmsis-core": "*",
+    "libc": "*"
+  },
+  "targetDependencies": {
+    "nucleo-f401re" : {
+      "cmsis-core-nucleo-f401re":"ARMmbed/cmsis-core-nucleo-f401re"
+    }
+  }
+}
