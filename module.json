@@ -14,12 +14,11 @@
   "license": "Apache-2",
   "extraIncludes": ["cmsis-core-stm32f4"],
   "dependencies": {
-    "cmsis-core": "*",
-    "libc": "*"
+    "cmsis-core": "ARMmbed/cmsis-core#~0.0.1"
   },
   "targetDependencies": {
     "nucleo-f401re" : {
-      "cmsis-core-nucleo-f401re":"ARMmbed/cmsis-core-nucleo-f401re"
+      "cmsis-core-nucleo-f401re":"ARMmbed/cmsis-core-nucleo-f401re#~0.0.1"
     }
   }
 }
