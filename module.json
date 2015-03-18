@@ -16,11 +16,11 @@
     "cmsis-core-stm32f4"
   ],
   "dependencies": {
-    "cmsis-core": "ARMmbed/cmsis-core#~0.0.1"
+    "cmsis-core": "ARMmbed/cmsis-core-private#~0.1.0"
   },
   "targetDependencies": {
     "nucleo-f401re": {
-      "cmsis-core-nucleo-f401re": "ARMmbed/cmsis-core-nucleo-f401re#~0.0.1"
+      "cmsis-core-nucleo-f401re": "ARMmbed/cmsis-core-nucleo-f401re-private#~0.1.0"
     }
   }
 }
