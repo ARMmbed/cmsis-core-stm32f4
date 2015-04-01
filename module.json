@@ -2,6 +2,7 @@
   "name": "cmsis-core-stm32f4",
   "version": "0.1.0",
   "description": "CMSIS Core Implementation for stm32f4 MCUs",
+  "private": true,
   "keywords": [
     "cmsis"
   ],
