@@ -65,6 +65,9 @@ void timer_irq_handler(void) {
 
 // Reconfigure the HAL tick using a standard timer instead of systick.
 HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
+    // Avoid warning
+    (void)TickPriority;
+
     // Enable timer clock
     TIM_MST_RCC;
 
