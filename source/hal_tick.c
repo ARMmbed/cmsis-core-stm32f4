@@ -33,6 +33,7 @@
   ******************************************************************************
   */
 #include "hal_tick.h"
+#include "uvisor-lib/override.h"
 
 // 0=NO, 1=PB6 toggles at each tick
 #define DEBUG_TICK 0
