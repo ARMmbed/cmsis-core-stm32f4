@@ -58,7 +58,15 @@
 static uint8_t SetSysClock_PLL(RCC_OscInitTypeDef *const rcc)
 {
     RCC_ClkInitTypeDef RCC_ClkInitStruct;
-    /* If you want to do this in a more generic way, use a custom Jinja2 filter
+    /* Refer to Section 5.1.3 of Reference Manual of STM32F4:
+     The voltage scaling allows optimizing the power consumption when the device is
+     clocked below the maximum system frequency, to update the voltage scaling value
+     regarding system frequency refer to product datasheet. */
+    __PWR_CLK_ENABLE();
+    /* Niklas: Not enabling voltage scaling for the moment, since we are operating at max system frequency */
+    /* __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2); */
+
+    /* Niklas: If you want to do this in a more generic way, use a custom Jinja2 filter
      * for computing these settings in python.
      *
      * This will require turning this file into a `system_clocks.c.jinja2` and adding
@@ -136,12 +144,6 @@ uint8_t SetSysClock_PLL_HSI(void)
 {
     RCC_OscInitTypeDef RCC_OscInitStruct;
 
-    /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
-     regarding system frequency refer to product datasheet. */
-    __PWR_CLK_ENABLE();
-    __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
     /* Enable HSI oscillator and activate PLL with HSI as source */
     RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_HSE;
     RCC_OscInitStruct.HSIState            = RCC_HSI_ON;
@@ -158,12 +160,6 @@ uint8_t SetSysClock_PLL_HSI(void)
 uint8_t SetSysClock_PLL_HSE(uint8_t bypass)
 {
     RCC_OscInitTypeDef RCC_OscInitStruct;
-
-    /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
-     regarding system frequency refer to product datasheet. */
-    __PWR_CLK_ENABLE();
-    __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
     /* Enable HSE oscillator and activate PLL with HSE as source */
     RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_HSE;
