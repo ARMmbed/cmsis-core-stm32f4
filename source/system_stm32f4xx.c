@@ -124,7 +124,7 @@ void SystemInit(void)
     RCC->CIR = 0x00000000;
 
     /* Configure the Cube driver */
-    SystemCoreClock = 16000000; // At this stage the HSI is used as system clock
+    SystemCoreClock = HSI_VALUE; // At this stage the HSI is used as system clock
 
     /* Configure the System clock source, PLL Multiplier and Divider factors,
        AHB/APBx prescalers and Flash settings */
