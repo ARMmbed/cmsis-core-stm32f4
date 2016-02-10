@@ -125,7 +125,6 @@ void SystemInit(void)
 
     /* Configure the Cube driver */
     SystemCoreClock = 16000000; // At this stage the HSI is used as system clock
-    HAL_Init();
 
     /* Configure the System clock source, PLL Multiplier and Divider factors,
        AHB/APBx prescalers and Flash settings */
@@ -143,9 +142,7 @@ void SystemInit(void)
         }
     }
 
-    /* Reset the timer to avoid issues after the RAM initialization */
-    TIM_MST_RESET_ON;
-    TIM_MST_RESET_OFF;
+    HAL_Init();
 }
 
 /**
