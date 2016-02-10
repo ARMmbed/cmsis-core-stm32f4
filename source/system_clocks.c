@@ -71,24 +71,24 @@ static uint8_t SetSysClock_PLL(RCC_OscInitTypeDef *const rcc)
     /* PLL Output must be between 192 and 432 MHz */
     /* HSI on F4 is always 16MHz */
     rcc->PLL.PLLM            = HSE_VALUE / 1000000; // VCO input clock = 1 MHz
-#if FCPU_VALUE == 84000000
+#if FCPU_VALUE == 84000000      //  84MHz
     rcc->PLL.PLLN            = 336;            // VCO output clock = 336 MHz
     rcc->PLL.PLLP            = RCC_PLLP_DIV4;  // PLLCLK = 84 MHz (336 MHz / 4)
     rcc->PLL.PLLQ            = 7;              // USB clock = 48 MHz (336 MHz / 7)
-#elif FCPU_VALUE == 100000000
+#elif FCPU_VALUE == 100000000   // 100MHz
     rcc->PLL.PLLN            = 400;            // VCO output clock = 400 MHz
     rcc->PLL.PLLP            = RCC_PLLP_DIV4;  // PLLCLK = 100 MHz (400 MHz / 4)
     rcc->PLL.PLLQ            = 9;              // USB clock = 44.44 MHz (400 MHz / 9) --> Not good for USB
-#elif FCPU_VALUE == 168000000
+#elif FCPU_VALUE == 168000000   // 168MHz
     rcc->PLL.PLLN            = 336;            // VCO output clock = 336 MHz
     rcc->PLL.PLLP            = RCC_PLLP_DIV2;  // PLLCLK = 168 MHz (336 MHz / 2)
     rcc->PLL.PLLQ            = 7;              // USB clock = 48 MHz (336 MHz / 7)
-#elif FCPU_VALUE == 180000000
+#elif FCPU_VALUE == 180000000   // 180MHz
     rcc->PLL.PLLN            = 360;            // VCO output clock = 360 MHz
     rcc->PLL.PLLP            = RCC_PLLP_DIV2;  // PLLCLK = 180 MHz (360 MHz / 2)
     rcc->PLL.PLLQ            = 8;              // USB clock = 45 MHz (360 MHz / 8) --> Not good for USB
 #else
-#   error "Unsupported CPU Frequency for PLL calculations!"
+#   error "Unsupported CPU Frequency for PLL calculations! Choose between 84MHz, 100MHz, 168MHz or 180MHz."
 #endif
 
     if (HAL_RCC_OscConfig(rcc) != HAL_OK)
@@ -99,7 +99,7 @@ static uint8_t SetSysClock_PLL(RCC_OscInitTypeDef *const rcc)
     /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
     RCC_ClkInitStruct.ClockType      = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
     RCC_ClkInitStruct.SYSCLKSource   = RCC_SYSCLKSOURCE_PLLCLK;
-#if FCPU_VALUE <= 100000000
+#if FCPU_VALUE <= 100000000 // 100MHz
     RCC_ClkInitStruct.AHBCLKDivider  = RCC_SYSCLK_DIV1;
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
     RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
