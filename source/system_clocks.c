@@ -77,8 +77,6 @@ static uint8_t SetSysClock_PLL(RCC_OscInitTypeDef *const rcc)
 
     rcc->PLL.PLLState = RCC_PLL_ON;
     /* PLL Output must be between 192 and 432 MHz */
-    /* HSI on F4 is always 16MHz */
-    rcc->PLL.PLLM            = HSE_VALUE / 1000000; // VCO input clock = 1 MHz
 #if FCPU_VALUE == 84000000      //  84MHz
     rcc->PLL.PLLN            = 336;            // VCO output clock = 336 MHz
     rcc->PLL.PLLP            = RCC_PLLP_DIV4;  // PLLCLK = 84 MHz (336 MHz / 4)
@@ -147,11 +145,12 @@ uint8_t SetSysClock_PLL_HSI(void)
     RCC_OscInitTypeDef RCC_OscInitStruct;
 
     /* Enable HSI oscillator and activate PLL with HSI as source */
-    RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_HSI;
     RCC_OscInitStruct.HSIState            = RCC_HSI_ON;
     RCC_OscInitStruct.HSEState            = RCC_HSE_OFF;
     RCC_OscInitStruct.HSICalibrationValue = 16;
     RCC_OscInitStruct.PLL.PLLSource       = RCC_PLLSOURCE_HSI;
+    RCC_OscInitStruct.PLL.PLLM            = HSI_VALUE / 1000000; /* HSI on F4 is always 16MHz */
 
     return SetSysClock_PLL(&RCC_OscInitStruct);
 }
@@ -165,8 +164,10 @@ uint8_t SetSysClock_PLL_HSE(uint8_t bypass)
 
     /* Enable HSE oscillator and activate PLL with HSE as source */
     RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.HSIState            = RCC_HSI_OFF;
     RCC_OscInitStruct.HSEState            = (bypass == 0) ? RCC_HSE_ON : RCC_HSE_BYPASS;
     RCC_OscInitStruct.PLL.PLLSource       = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLM            = HSE_VALUE / 1000000;
 
     return SetSysClock_PLL(&RCC_OscInitStruct);
 }
