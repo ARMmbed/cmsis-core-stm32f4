@@ -95,6 +95,8 @@ static uint8_t SetSysClock_PLL(RCC_OscInitTypeDef *const rcc)
     rcc->PLL.PLLN            = 360;            // VCO output clock = 360 MHz
     rcc->PLL.PLLP            = RCC_PLLP_DIV2;  // PLLCLK = 180 MHz (360 MHz / 2)
     rcc->PLL.PLLQ            = 8;              // USB clock = 45 MHz (360 MHz / 8) --> Not good for USB
+    // Niklas: is power overdrive mode a hard requirement here?
+    __HAL_PWR_OVERDRIVE_ENABLE();
 #else
 #   error "Unsupported CPU Frequency for PLL calculations! Choose between 84MHz, 100MHz, 168MHz or 180MHz."
 #endif
