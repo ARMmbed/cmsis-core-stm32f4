@@ -141,8 +141,6 @@ void SystemInit(void)
            // [TODO] Put something here to tell the user that a problem occured...
         }
     }
-
-    HAL_Init();
 }
 
 /**
