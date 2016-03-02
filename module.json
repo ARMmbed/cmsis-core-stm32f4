@@ -26,6 +26,9 @@
     "stm32f401xe-no-inherit": {
       "cmsis-core-stm32f401xe": "~0.1.0"
     },
+    "stm32f407xg": {
+      "cmsis-core-stm32f407xg": "~0.0.1"
+    },
     "stm32f429xi-no-inherit": {
       "cmsis-core-stm32f429xi": "^1.0.0"
     },
